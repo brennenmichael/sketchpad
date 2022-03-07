@@ -8,29 +8,20 @@
   }
 
 body {
-    overflow: hidden;
-    height: 100vh;
-    width: 100vw;
-    justify-content: center;
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    grid-template-rows: repeat(7, 1fr);
-    grid-column-gap: 0px;
-    grid-row-gap: 0px;
+    justify-content: space-evenly;
+    display: flex;
 }
 
-#left { grid-area: 2 / 1 / 8 / 2; 
-    border: solid purple 2px;
+#left {  
+    border: solid skyblue 2px;
+    background-color: blue;
 }
-#right { grid-area: 4 / 7 / 5 / 8; 
+
+#right {  
     border: solid purple 2px}
 
 #canvas {
     border: solid red 2px;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     height: 800px;
     width: 800px;
     display: grid;

@@ -28,7 +28,20 @@ function setDimensions(div, boxHeight, boxWidth, rows) {
     div.style.padding = 100/rows + "%";
 }
 
+function clearCanvas() {
+    const gridItems = document.getElementsByClassName('grid-item')
+    for(let i = 0; i < gridItems.length; i++) {
+        if (gridItems[i].classList.contains("filled")) gridItems[i].classList.remove('filled')
+    }
+}
+
 document.addEventListener('click', (e) => {
     let element = e.target;
     if (element.matches('.grid-item.blank')) element.classList.add('filled')
 })
+
+document.addEventListener('click', (e) => {
+    let element = e.target;
+    if (element.matches('.clear.btn')) clearCanvas()
+})
+
