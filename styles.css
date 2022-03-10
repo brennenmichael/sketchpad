@@ -65,3 +65,36 @@ border: 1px solid #ccc;
     text-align: center;
     position: relative;
 }
+
+.color-select {
+    height: 25px;
+    width: 25px;
+    border-radius: 50px;
+    margin: 20px;
+    border-color: black;
+}
+
+.color-select:hover{
+    transform:scale(1.05);
+}
+
+.red {
+    background-color: #ff0000;
+}
+
+.yellow {
+    background-color: #ffff00;
+}
+
+.green {
+    background-color: #008800;
+}
+
+.blue {
+    background-color: #0000ff;
+}
+
+.black {
+    background-color: #000000;
+}
+
