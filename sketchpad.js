@@ -31,8 +31,9 @@ function setDimensions(div, boxHeight, boxWidth, rows) {
 
 function clearCanvas() {
     const gridItems = document.getElementsByClassName('grid-item')
+    
     for(let i = 0; i < gridItems.length; i++) {
-        if (gridItems[i].classList.contains("filled")) gridItems[i].classList.remove('filled')
+      gridItems[i].style.setProperty('background-color', 'white')
     }
 }
 
@@ -40,6 +41,9 @@ document.addEventListener('click', (e) => {
     let element = e.target;
     if (element.matches('.clear.btn')) clearCanvas()
 })
+
+
+//toggle fill
 
 function enableToggle(e) {
   isToggling = true;
@@ -54,21 +58,35 @@ function disableToggle() {
 }
 
 function toggle(e) {
-  if (isToggling === false) {
-    return;
-  }
-
-  e.target.classList.toggle('filled');
+  if (isToggling ===false) return
+  
+  e.target.style.setProperty('background-color', colorWell.value)
 }
 
 function draw() {
+  colorWell = document.querySelector("#colorWell")
+  colorWell.value = defaultColor;
   canvas.onmousedown = enableToggle;
 
   for (let i = 0; i < gridItems.length; i++) {
-    gridItems[i].onmouseenter = toggle; //changes color 
+    gridItems[i].onmouseenter = toggle; 
   }
 
   canvas.onmouseup = disableToggle;
+}
+
+
+//Code for color selector
+
+let colorWell; 
+const defaultColor = "#000000";
+
+window.addEventListener("load", startup, false);
+
+function startup() {
+  colorWell = document.querySelector("#colorWell");
+  colorWell.value = defaultColor;
+  colorWell.select(); //this one is just in case color well is browser incompatible
 }
 
 draw();
