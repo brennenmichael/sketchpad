@@ -3,10 +3,6 @@ const gridItems = document.getElementsByClassName('grid-item');
 let isToggling = false;
 
 function makeRows(rows) {
-    // rows = prompt("Enter number for square sketchpad size (Less than 100):")
-    // while(rows > 100) {
-    //     rows = prompt("Number too large. Please enter number less than 100:")
-    // }
     canvas.style.setProperty('--grid-rows', rows);
     canvas.style.setProperty('--grid-cols', rows);
     const canvasHeight = canvas.clientHeight
@@ -34,8 +30,6 @@ function makeRows(rows) {
 
     setDimensions(gridItems, canvasHeight, canvasWidth, rows)
   };
-  
-  //makeRows()
 
 function setDimensions(nodeList, boxHeight, boxWidth, rows) {
   console.log(rows)
