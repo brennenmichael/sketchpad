@@ -87,7 +87,6 @@ function toggle(e) {
 
 function draw() {
   colorWell = document.querySelector("#colorWell")
-  colorWell.value = defaultColor;
   canvas.onmousedown = enableToggle;
 
   for (let i = 0; i < gridItems.length; i++) {
@@ -149,7 +148,6 @@ const setValue = ()=>{
   rangeV.innerHTML = `<span>${range.value}</span>`;
   rangeV.style.left = `calc(${newValue}% + (${newPosition}px) + (9px))`;
   clearCanvas();
-  //TODO: CLEAN UP
   makeRows(range.value)
   draw()
 };
