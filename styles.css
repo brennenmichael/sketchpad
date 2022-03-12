@@ -10,10 +10,13 @@
 body {
     justify-content: space-evenly;
     display: flex;
+    overflow-y: hidden;
 }
 
 #left {  
     display: flex;
+    height: 100vh;
+    flex-grow: 1;
     flex-direction: column;
     border: solid skyblue 2px;
     align-items: center;
@@ -22,32 +25,102 @@ body {
 
 #right {  
     border: solid purple 2px;
+    height: 100vh;
     display: flex;
+    flex-grow: 1;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
 
+#middle {
+    display: flex;
+    flex-grow: 2;
+    flex-direction: column;
+    height: 100vh;
+    align-items: center;
+}
+
 #canvas {
-    border: solid red 2px;
-    height: 800px;
-    width: 800px;
+    border: solid black 5px;
+    height: 600px;
+    width: 600px;
+    margin: 50px;
     display: grid;
     grid-template-rows: repeat(var(--grid-rows), 1fr);
     grid-template-columns: repeat(var(--grid-cols), 1fr);
 }
 
+.slide-container {
+    width: 60%;
+    position: relative;
+    margin: 0 auto 3rem;
+}
+
+.range {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 6px;
+    border-radius: 15px;
+    margin: 10px;
+    margin-top: 12px;
+    background: #2b2d32;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    transform: rotate(45deg);
+    border-radius: 4px;
+    background: #8f44fd;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.range::-webkit-slider-thumb:hover {
+    transform: scale(1.2, 0.9);
+}
+
+.range-value{
+    position: absolute;
+    top: -100%;
+}
+.range-value span{
+width: 30px;
+height: 24px;
+line-height: 24px;
+text-align: center;
+background: #03a9f4;
+color: #fff;
+font-size: 12px;
+display: block;
+position: absolute;
+left: 50%;
+transform: translate(-50%, 0);
+border-radius: 6px;
+}
+.range-value span:before{
+content: "";
+position: absolute;
+width: 0;
+height: 0;
+border-top: 10px solid #03a9f4;
+border-left: 5px solid transparent;
+border-right: 5px solid transparent;
+top: 100%;
+left: 50%;
+margin-left: -5px;
+margin-top: -1px;
+}
+
 .grid-item {
-padding: 1em;
-border: 1px solid #ccc;
-}
-
-.blank {
+    padding: 1em;
+    border: 1px solid #ccc;
     background-color: white;
-}
-
-.filled {
-    background-color: black;
 }
 
 .btn {

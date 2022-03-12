@@ -2,31 +2,54 @@ const canvas = document.getElementById("canvas")
 const gridItems = document.getElementsByClassName('grid-item');
 let isToggling = false;
 
-function makeRows() {
-    rows = prompt("Enter number for square sketchpad size (Less than 100):")
-    while(rows > 100) {
-        rows = prompt("Number too large. Please enter number less than 100:")
-    }
+function makeRows(rows) {
+    // rows = prompt("Enter number for square sketchpad size (Less than 100):")
+    // while(rows > 100) {
+    //     rows = prompt("Number too large. Please enter number less than 100:")
+    // }
     canvas.style.setProperty('--grid-rows', rows);
     canvas.style.setProperty('--grid-cols', rows);
     const canvasHeight = canvas.clientHeight
     const canvasWidth = canvas.clientWidth
-    for (c = 0; c < (rows * rows); c++) {
-      let cell = document.createElement("div");
-      canvas.appendChild(cell).className = "grid-item";
-    };
-    for (let i = 0; i < gridItems.length; i++) {
-        gridItems[i].className += " blank" 
-        setDimensions(gridItems[i], canvasHeight, canvasWidth, rows)
+    if (gridItems.length == 0){
+      for (c = 0; c < (rows * rows); c++) {
+        let cell = document.createElement("div");
+        canvas.appendChild(cell).className = "grid-item";
+      };
     }
+    while (gridItems.length < rows * rows) {
+        let cell = document.createElement("div");
+
+        for (c = gridItems.length; c < (rows * rows); c++) {
+          canvas.appendChild(cell).className = "grid-item";
+        };
+      } 
+    while (gridItems.length > rows * rows) {
+        let cell = document.createElement("div");
+        for (c = gridItems.length; c > (rows*rows); c--) {
+          let gridItem = document.querySelector(".grid-item")
+          canvas.removeChild(gridItem);
+        }
+    }
+
+    setDimensions(gridItems, canvasHeight, canvasWidth, rows)
   };
   
-  makeRows()
+  //makeRows()
 
-function setDimensions(div, boxHeight, boxWidth, rows) {
-    div.style.height = boxHeight/rows + "px";
-    div.style.width = boxWidth/rows + "px";
-    div.style.padding = 100/rows + "%";
+function setDimensions(nodeList, boxHeight, boxWidth, rows) {
+  console.log(rows)
+    if (rows == 1){
+      nodeList[i].style.height = boxHeight + "px";
+      nodeList[i].style.width = boxWidth + "px";
+      nodeList[i].style.padding = "100%";
+    }
+
+    for (let i = 0; i < nodeList.length; i++){
+      nodeList[i].style.height = boxHeight/rows + "px";
+      nodeList[i].style.width = boxWidth/rows + "px";
+      nodeList[i].style.padding = 100/rows + "%";
+    }
 }
 
 function clearCanvas() {
@@ -47,7 +70,6 @@ document.addEventListener('click', (e) => {
 
 function enableToggle(e) {
   isToggling = true;
-
   if (e.target !== canvas) {
     toggle(e);
   }
@@ -59,7 +81,7 @@ function disableToggle() {
 
 function toggle(e) {
   if (isToggling ===false) return
-
+  console.log(`enter`)
   e.target.style.setProperty('background-color', colorWell.value)
 }
 
@@ -116,4 +138,22 @@ document.addEventListener('click', (e) => {
   if (element.matches(".color-select")) colorWell.value = RGBToHex(element.style.backgroundColor);
 })
 
-draw();
+
+//slider code
+const range = document.getElementById('myRange')
+const rangeV = document.getElementById('rangeV')
+
+const setValue = ()=>{
+  const newValue = Number( (range.value - range.min) * 100 / (range.max - range.min) )
+  const newPosition = 10 - (newValue * 0.2);
+  rangeV.innerHTML = `<span>${range.value}</span>`;
+  rangeV.style.left = `calc(${newValue}% + (${newPosition}px) + (9px))`;
+  clearCanvas();
+  //TODO: CLEAN UP
+  makeRows(range.value)
+  draw()
+};
+
+
+document.addEventListener("DOMContentLoaded", setValue);
+range.addEventListener('input', setValue);
